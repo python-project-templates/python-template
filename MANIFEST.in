@@ -1,0 +1,30 @@
+graft python_template
+graft python_template/tests
+
+include LICENSE
+include README.md
+include CONTRIBUTING.md
+
+include .bumpversion.cfg
+include pyproject.toml
+include Makefile
+
+prune docs
+prune .vscode
+prune .github
+
+# test and lint assets
+prune .pytest_cache
+prune .ruff_cache
+prune .mypy_cache
+
+exclude .gitignore
+exclude .gitattributes
+
+# Patterns to exclude from any directory
+global-exclude *~
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude .git
+global-exclude .ipynb_checkpoints
+global-exclude .DS_Store
