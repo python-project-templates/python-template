@@ -78,3 +78,7 @@ jobs:
 
     - name: Upload coverage
       uses: codecov/codecov-action@v3
+
+    - name: Make dist
+      run: make dist
+      if: ${{ matrix.os == 'ubuntu-latest' }}
