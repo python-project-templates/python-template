@@ -37,7 +37,6 @@ Homepage = "https://github.com/python-project-templates/python"
 
 [project.optional-dependencies]
 develop = [
-    "black>=23",
     "bump2version",
     "check-manifest",
     "mypy",
