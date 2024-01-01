@@ -31,8 +31,9 @@ jobs:
 
     - name: Install dependencies
       run: make develop
-    - name: Make python dist
-      run: make dist-py
+
+    - name: Make dist
+      run: make dist
       if: ${{ matrix.os == 'ubuntu-latest' }}
 
     - uses: actions/upload-artifact@v4
