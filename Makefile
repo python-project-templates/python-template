@@ -18,12 +18,14 @@ install:  ## install library
 .PHONY: lint lints fix format
 
 lint:  ## run python linter with ruff
+	python -m isort python_template setup.py --check
 	python -m ruff python_template setup.py
 
 # Alias
 lints: lint
 
 fix:  ## fix python formatting with ruff
+	python -m isort python_template setup.py
 	python -m ruff format python_template setup.py
 
 # alias
