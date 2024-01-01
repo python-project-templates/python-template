@@ -96,7 +96,7 @@ major:  ## bump a major version
 .PHONY: dist dist-build dist-sdist dist-local-wheel publish
 
 dist-build:  # build python dists
-	python setup.py sdist bdist_wheel
+	python -m build -w -s
 
 dist-check:  ## run python dist checker with twine
 	python -m twine check dist/*
