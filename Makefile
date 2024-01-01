@@ -1,15 +1,13 @@
 #########
 # BUILD #
 #########
-.PHONY: develop build-py build-js build install serverextension labextension
+.PHONY: develop build install
 
 develop:  ## install dependencies and build library
 	python -m pip install -e .[develop]
 
-build-py:  ## build the python library
+build:  ## build the python library
 	python setup.py build build_ext --inplace
-
-build: build-py  ## build the library
 
 install:  ## install library
 	python -m pip install .
@@ -17,22 +15,16 @@ install:  ## install library
 #########
 # LINTS #
 #########
-.PHONY: lint-py lint-js lint-cpp lint  lints fix-py fix-js fix-cpp fix format
+.PHONY: lint lints fix format
 
-lint-py:  ## run python linter with flake8 and black
+lint:  ## run python linter with ruff
 	python -m ruff python_template setup.py
-	python -m black --check python_template setup.py
-
-lint: lint-py  ## run all lints
 
 # Alias
 lints: lint
 
-fix-py:  ## fix python formatting with black
-	python -m black python_template/ setup.py
-	python -m ruff python_template/ setup.py --fix
-
-fix: fix-py  ## run all autofixers
+fix:  ## fix python formatting with ruff
+	python -m ruff format python_template setup.py
 
 # alias
 format: fix
@@ -59,17 +51,13 @@ annotate:  ## run python type annotation checks with mypy
 #########
 # TESTS #
 #########
-.PHONY: test-py test-js coverage-py test coverage tests
+.PHONY: test coverage tests
 
-test-py:  ## run python tests
+test:  ## run python tests
 	python -m pytest -v python_template/tests --junitxml=junit.xml
 
-coverage-py:  ## run tests and collect test coverage
+coverage:  ## run tests and collect test coverage
 	python -m pytest -v python_template/tests --junitxml=junit.xml --cov=python_template --cov-branch --cov-fail-under=75 --cov-report term-missing --cov-report xml
-
-test: test-py  ## run all tests
-
-coverage: coverage-py  ## run all tests with coverage collection
 
 # Alias
 tests: test
@@ -105,20 +93,17 @@ major:  ## bump a major version
 ########
 # DIST #
 ########
-.PHONY: dist-py dist-py-sdist dist-py-local-wheel publish-py publish-js publish
+.PHONY: dist dist-build dist-sdist dist-local-wheel publish
 
-dist-py:  # build python dists
+dist-build:  # build python dists
 	python setup.py sdist bdist_wheel
 
 dist-check:  ## run python dist checker with twine
 	python -m twine check dist/*
 
-dist: clean build dist-py dist-check  ## build all dists
+dist: clean build dist-build dist-check  ## build all dists
 
-publish-py:  # publish python assets
-	python -m twine upload dist/* --skip-existing
-
-publish: dist publish-py  ## publish all dists
+publish: dist  # publish python assets
 
 #########
 # CLEAN #
