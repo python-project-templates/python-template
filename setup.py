@@ -1,3 +1,1 @@
-from setuptools import setup
-
-setup()
+__import__("setuptools").setup()

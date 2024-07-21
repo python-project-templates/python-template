@@ -1,19 +1,16 @@
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend="setuptools.build_meta"
+requires = ["hatchling"]
+build-backend="hatchling.build"
 
 [project]
-name = "python_template"
-authors = [{name = "Tim Paine", email = "t.paine154@gmail.com"}]
+name = "python-template"
+authors = [{name = "Python Project Template Authors", email = "t.paine154@gmail.com"}]
 description="A pure-python project template"
 readme = "README.md"
 license = { text = "Apache-2.0" }
 version = "0.1.0"
-requires-python = ">=3.8"
-keywords = [
-    "some",
-    "keywords",
-]
+requires-python = ">=3.9"
+keywords = []
 
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -27,70 +24,97 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 
-dependencies = [
-    "numpy",
-]
+dependencies = []
 
 [project.urls]
-Repository = "https://github.com/python-project-templates/python"
-Homepage = "https://github.com/python-project-templates/python"
+Repository = "https://github.com/python-project-templates/python-template"
+Homepage = "https://github.com/python-project-templates/python-template"
 
 [project.optional-dependencies]
 develop = [
-    "bump2version",
+    "build",
+    "bump-my-version",
     "check-manifest",
-    "isort",
-    "mypy",
+    "hatchling",
     "pytest",
     "pytest-cov",
     "ruff",
-    "semgrep",
-    "Sphinx",
-    "sphinx-markdown-builder",
     "twine",
     "wheel",
 ]
-test = [
-    "pytest",
-    "pytest-cov",
-]
+
+[project.scripts]
+
+[tool.bumpversion]
+current_version = "0.1.0"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "python_template/__init__.py"
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
 
 [tool.check-manifest]
-ignore = []
+ignore = [
+    ".copier-answers.yml",
+    "Makefile",
+    "setup.py",
+]
 
-[tool.isort]
-combine_as_imports = true
-include_trailing_comma = true
-line_length = 120
-profile = "black"
+[tool.hatch.build]
+artifacts = []
 
-default_section = "THIRDPARTY"
-sections = "FUTURE,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+[tool.hatch.build.sources]
+src = "/"
 
-known_first_party = "python_template"
+[tool.hatch.build.targets.sdist]
+include = [
+    "/python_template",
+    "LICENSE",
+    "README.md",
+]
+exclude = [
+    "/.github",
+    "/.gitattributes",
+    "/.gitignore",
+]
 
-[tool.mypy]
-python_version = "3.10"
-# show_error_codes = true
-# follow_imports = "silent"
-# strict_optional = true
-# warn_redundant_casts = true
-# warn_unused_ignores = true
-# disallow_any_generics = true
-# check_untyped_defs = true
-# no_implicit_reexport = true
-# warn_unused_configs = true
-# disallow_subclassing_any = true
-# disallow_incomplete_defs = true
-# disallow_untyped_decorators = true
-# disallow_untyped_calls = true
+[tool.hatch.build.targets.wheel]
+include = [
+    "/python_template",
+]
+exclude = [
+    "/.github",
+    "/.gitattributes",
+    "/.gitignore",
+    "/pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel.shared-data]
 
 [tool.pytest.ini_options]
 asyncio_mode = "strict"
 testpaths = "python_template/tests"
 
 [tool.ruff]
-line-length = 120
+line-length = 150
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.isort]
+combine-as-imports = true
+default-section = "third-party"
+known-first-party = ["python_template"]
+section-order = [
+    "future",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]

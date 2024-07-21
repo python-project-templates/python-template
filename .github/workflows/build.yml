@@ -1,3 +1,4 @@
+
 name: Build Status
 
 on:
@@ -7,8 +8,6 @@ on:
     tags:
       - v*
     paths-ignore:
-      - docs/
-      - CONTRIBUTING.md
       - LICENSE
       - README.md
   pull_request:
@@ -32,7 +31,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python-version: [3.9]
+        python-version: ["3.11"]
 
     steps:
     - uses: actions/checkout@v4
@@ -82,3 +81,4 @@ jobs:
     - name: Make dist
       run: make dist
       if: ${{ matrix.os == 'ubuntu-latest' }}
+
