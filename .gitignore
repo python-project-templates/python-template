@@ -137,3 +137,7 @@ _template/labextension
 
 # Mac
 .DS_Store
+
+# Rust
+target
+
