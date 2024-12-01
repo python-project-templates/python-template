@@ -64,6 +64,7 @@ ignore = [
     ".copier-answers.yml",
     "Makefile",
     "setup.py",
+    "docs/**/*",
 ]
 
 [tool.coverage.run]
@@ -87,29 +88,10 @@ artifacts = []
 src = "/"
 
 [tool.hatch.build.targets.sdist]
-include = [
-    "/python_template",
-    "LICENSE",
-    "README.md",
-]
-exclude = [
-    ".copier-answers.yml",
-    "/.github",
-    "/.gitattributes",
-    "/.gitignore",
-]
+packages = ["python_template"]
 
 [tool.hatch.build.targets.wheel]
-include = [
-    "/python_template",
-]
-exclude = [
-    ".copier-answers.yml",
-    "/.github",
-    "/.gitattributes",
-    "/.gitignore",
-    "/pyproject.toml",
-]
+packages = ["python_template"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 
