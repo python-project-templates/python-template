@@ -1,0 +1,21 @@
+python_template
+===============
+
+.. py:module:: python_template
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   python_template.__version__
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   :value: '0.1.0'
+
+
