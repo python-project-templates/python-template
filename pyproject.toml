@@ -119,3 +119,10 @@ section-order = ["future", "standard-library", "third-party", "first-party", "lo
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
+
+[tool.yardang]
+title = "python template"
+root = "README.md"
+pages = []
+use-autoapi = true
+
