@@ -146,6 +146,7 @@ python_template/extension
 # Jupyter
 .ipynb_checkpoints
 .autoversion
+Untitled*.ipynb
 !python_template/extension/python_template.json
 !python_template/extension/install.json
 python_template/nbextension
