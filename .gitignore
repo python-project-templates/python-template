@@ -141,14 +141,12 @@ js/node_modules
 js/test-results
 js/playwright-report
 js/*.tgz
-python_template/extension
 
 # Jupyter
 .ipynb_checkpoints
 .autoversion
 Untitled*.ipynb
-!python_template/extension/python_template.json
-!python_template/extension/install.json
+python_template/extension
 python_template/nbextension
 python_template/labextension
 
@@ -157,3 +155,7 @@ python_template/labextension
 
 # Rust
 target
+
+# Hydra
+outputs/
+multirun/
