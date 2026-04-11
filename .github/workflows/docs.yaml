@@ -22,9 +22,12 @@ jobs:
       - name: Download dist from build
         uses: actions/download-artifact@v7
         with:
-          name: dist-ubuntu-latest
+          pattern: dist-ubuntu-latest*
+          merge-multiple: true
           path: dist
           run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
         if: github.event_name == 'workflow_run'
 
       - name: Install from wheel
