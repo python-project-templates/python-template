@@ -1,4 +1,4 @@
-from python_template import *  # noqa
+from python_template import *
 
 
 def test_all():
